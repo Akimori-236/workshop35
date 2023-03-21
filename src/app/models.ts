@@ -3,14 +3,14 @@ export interface SearchTerms {
     offset: number
 }
 export interface Game {
-    game_id: number
+    gid: number
     name: string
-    year: number
-    ranking: number
-    average: string
-    users_rated: number
-    url: string
-    image: string
+    year?: number
+    ranking?: number
+    average?: string
+    users_rated?: number
+    url?: string
+    image?: string
 }
 export interface Response {
     games: Game[]

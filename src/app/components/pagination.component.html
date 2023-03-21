@@ -1,17 +1,31 @@
 <div class="container col-6">
-  <form>
+  <form [formGroup]="pageForm">
     <div class="d-flex justify-content-between">
-        <label for="limitID">Games per page:</label>
-        <select name="limit" id="limitID" >
-          <option *ngFor="let v of itemsPerPage; let i = index" [value]="v" (onChange)="getNewList(v)">{{v}}</option>
-        </select>
+      <label class="fw-bold col-9" for="limitID">Games per page:</label>
+      <select
+        class="form-select"
+        name="limit"
+        id="limitID"
+        formControlName="limit"
+        (change)="limitChange()"
+      >
+        <option
+          *ngFor="let v of itemsPerPage"
+          [value]="v"
+          [selected]="v === limit"
+        >
+          {{ v }}
+        </option>
+      </select>
     </div>
 
     <app-display-list></app-display-list>
 
     <div class="d-flex justify-content-between">
-      <button type="button" class="btn btn-dark">Previous</button>
-      <button type="button" class="btn btn-dark">Next</button>
+      <button type="button" class="btn btn-dark" (click)="previous()">
+        Previous
+      </button>
+      <button type="button" class="btn btn-dark" (click)="next()">Next</button>
     </div>
   </form>
 </div>

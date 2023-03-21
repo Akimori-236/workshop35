@@ -1,32 +1,25 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GameService } from '../GameService';
+import { Game, SearchTerms } from '../models';
 import { Subscription } from 'rxjs';
-import { Game } from '../models';
 
 @Component({
   selector: 'app-display-list',
   templateUrl: './display-list.component.html',
   styleUrls: ['./display-list.component.css']
 })
-export class DisplayListComponent implements OnInit, OnDestroy {
+export class DisplayListComponent implements OnInit {
 
   constructor(private gameSvc: GameService) { }
 
-  gameSub!: Subscription
   gameList: Game[] = []
-  gameNameList: string[] = []
+  gameSub!: Subscription
 
   ngOnInit(): void {
-    // sub to service on init
+    // sub to service
     this.gameSub = this.gameSvc.onGames.subscribe(
-      // intake data from sub
-      (data) => this.gameList = data
+      response => this.gameList = response
     )
   }
 
-  ngOnDestroy(): void {
-    this.gameSub.unsubscribe()
-  }
-
-  
 }

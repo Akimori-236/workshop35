@@ -1,3 +1,7 @@
-<div class="container">
-    
+<div class="container border border-dark my-3">
+  <table class="table table-bordered">
+    <tr *ngFor="let game of gameList; let i = index">
+      <td>{{ game.name }}</td>
+    </tr>
+  </table>
 </div>

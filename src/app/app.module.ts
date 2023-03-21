@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { PaginationComponent } from './components/pagination.component';
 import { DisplayListComponent } from './components/display-list.component';
 import { GameService } from './GameService';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { GameService } from './GameService';
     DisplayListComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [GameService],
   bootstrap: [AppComponent]

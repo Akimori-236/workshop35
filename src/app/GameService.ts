@@ -3,8 +3,8 @@ import { Injectable } from "@angular/core";
 import { firstValueFrom, Observable, Subject } from "rxjs";
 import { Game, SearchTerms } from "./models";
 
-// Springboot run From workshop 26
-const GAMES_API = "localhost:8080/games"
+// Springboot run from paf-workshop26
+const GAMES_API = "http://localhost:8080/games"
 
 @Injectable()
 export class GameService {
@@ -13,26 +13,24 @@ export class GameService {
 
     onGames = new Subject<Game[]>
 
-    getGamesObs(s: SearchTerms): Observable<Response> {
+    getGameObs(s: SearchTerms): Observable<any> {
         const params = new HttpParams()
             .set('limit', s.limit)
             .set('offset', s.offset)
-
-        return this.http.get<Response>(GAMES_API, { params })
+        return this.http.get<any>(GAMES_API, { params })
             .pipe()
     }
 
     getGames(s: SearchTerms): Promise<Game[]> {
-        return firstValueFrom(
-            this.getGamesObs(s)
-        ).then((response: any) => {
-            const games = response['games'] as Game[]
-            return games
-        }).then((gameList: Game[]) => {
-            this.onGames.next(gameList)
-            return gameList
-        })
+        return firstValueFrom(this.getGameObs(s))
+            .then((response: any) => {
+                const g = response['games'] as Game[]
+                return g
+            })
+            .then(games => {
+                this.onGames.next(games)
+                return games
+            })
     }
-
 
 }
