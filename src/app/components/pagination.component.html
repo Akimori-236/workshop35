@@ -1,0 +1,17 @@
+<div class="container col-6">
+  <form>
+    <div class="d-flex justify-content-between">
+        <label for="limitID">Games per page:</label>
+        <select name="limit" id="limitID" >
+          <option *ngFor="let v of itemsPerPage; let i = index" [value]="v" (onChange)="getNewList(v)">{{v}}</option>
+        </select>
+    </div>
+
+    <app-display-list></app-display-list>
+
+    <div class="d-flex justify-content-between">
+      <button type="button" class="btn btn-dark">Previous</button>
+      <button type="button" class="btn btn-dark">Next</button>
+    </div>
+  </form>
+</div>
